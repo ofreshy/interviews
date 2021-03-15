@@ -53,7 +53,7 @@ class Node(object):
 
 def count_elements(sequence):
     elem = []
-    for i in xrange(len(sequence)):
+    for i in range(len(sequence)):
         e = sequence[i]
 
 

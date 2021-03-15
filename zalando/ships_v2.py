@@ -17,7 +17,7 @@ class Board(object):
         :param int n: board size
         :return: initial board of size N
         """
-        cells = [[False for _ in xrange(n)] for _ in xrange(n)]
+        cells = [[False for _ in range(n)] for _ in range(n)]
         return cls(cells)
 
     def __init__(self, cells):
@@ -43,8 +43,8 @@ class Board(object):
         i_end, j_end = to_int_coords(bottom_right)
         cells = [
             (i, j, self._cells[i][j])
-            for i in xrange(i_start, i_end + 1)
-            for j in xrange(j_start, j_end + 1)
+            for i in range(i_start, i_end + 1)
+            for j in range(j_start, j_end + 1)
         ]
         return cells
 

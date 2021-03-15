@@ -9,8 +9,10 @@ def highest(list_of_ints):
     # so pre-populate highests and lowests based on the first 2 items.
     # we could also start these as None and check below if they're set
     # but this is arguably cleaner
-    highest = max(list_of_ints[0], list_of_ints[1])
-    lowest = min(list_of_ints[0], list_of_ints[1])
+    if list_of_ints[0] >= list_of_ints[1]:
+        highest, lowest = list_of_ints[0], list_of_ints[1]
+    else:
+        highest, lowest = list_of_ints[1], list_of_ints[0]
 
     highest_product_of_2 = list_of_ints[0] * list_of_ints[1]
     lowest_product_of_2 = list_of_ints[0] * list_of_ints[1]

@@ -26,29 +26,27 @@ from collections import defaultdict
 class TemperatureTracker(object):
     def __init__(self):
         self.samples = 0
-        self.max = None
-        self.min = None
-        self.mean = None
+        self.max = float('-inf')  # smallest number
+        self.min = float('inf')   # largest number
+        self.mean = 0
         self.freq = defaultdict(int)
+        self.mode_freq = 0
         self.modes = set()
 
     def insert(self, temp):
         self.samples += 1
-        if self.max is None or temp > self.max:
-            self.max = temp
-        if self.min is None or temp < self.min:
-            self.min = temp
-        if self.mean is None:
-            self.mean = 0
+        self.max = max(self.max, temp)
+        self.min = min(self.min, temp)
         self.mean = (self.mean*(self.samples-1) + temp) / self.samples
 
-        mode_freq = 0 if not self.modes else self.freq[list(self.modes)[0]]
-        temp_freq = self.freq[temp] + 1
-        if temp_freq == mode_freq:
+        self.freq[temp] += 1
+        temp_freq = self.freq[temp]
+
+        if temp_freq == self.mode_freq:
             self.modes.add(temp)
-        elif temp_freq > mode_freq:
+        elif temp_freq > self.mode_freq:
+            self.mode_freq = temp_freq
             self.modes = set([temp])
-        self.freq[temp] = temp_freq
 
     def get_max(self):
         return self.max
@@ -67,10 +65,6 @@ class TemperatureTracker(object):
 
 
 t = TemperatureTracker()
-assert t.get_max() is None
-assert t.get_min() is None
-assert t.get_mean() is None
-
 t.insert(5)
 assert t.get_max() == 5
 assert t.get_min() == 5

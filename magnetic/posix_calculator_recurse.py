@@ -15,4 +15,5 @@ def solve(expr):
         # must be true
         return float(operator)
 
+
 assert solve([e for e in "+ + 1 2 3" if e.strip()]) == 6

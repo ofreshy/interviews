@@ -5,7 +5,7 @@ def merge_intervals(intervals):
 
     intervals = sorted(intervals, key=lambda x: x[0])
     merged_intervals = [intervals[0]]
-    for i in xrange(1, len(intervals)):
+    for i in range(1, len(intervals)):
         last_merged = merged_intervals.pop()
         current_interval = intervals[i]
         merged = merge(last_merged, current_interval)

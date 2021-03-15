@@ -16,8 +16,8 @@ class Board(object):
         :return: initial board of size N
         """
         cells = dict()
-        for i in xrange(1, 1+n):
-            for j in xrange(ord("A"), ord("A")+n):
+        for i in range(1, 1+n):
+            for j in range(ord("A"), ord("A")+n):
                 cells[(i, j)] = False
         return cls(cells)
 
@@ -44,8 +44,8 @@ class Board(object):
         i_end, j_end = to_int_coords(bottom_right)
         cells = [
             (i, j, self._cells[(i, j)])
-            for i in xrange(i_start, i_end + 1)
-            for j in xrange(j_start, j_end + 1)
+            for i in range(i_start, i_end + 1)
+            for j in range(j_start, j_end + 1)
         ]
         return cells
 

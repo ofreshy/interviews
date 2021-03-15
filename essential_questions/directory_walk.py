@@ -13,9 +13,9 @@ def print_directory_contents(sPath, indent=1):
     for child in os.listdir(sPath):
         child_path = os.path.join(sPath, child)
         if os.path.isfile(child_path):
-            print '-' * indent + child_path
+            print('-' * indent + child_path)
         elif os.path.isdir(child_path):
-            print '-' * indent + child_path
+            print('-' * indent + child_path)
             print_directory_contents(child_path, indent+1)
 
-print_directory_contents("/Users/osharabi/Documents")
+print_directory_contents("/Users/osharabi/Development/projects/personal/interviews/")
