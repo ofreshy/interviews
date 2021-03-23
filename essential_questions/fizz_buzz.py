@@ -26,7 +26,7 @@ def helper(digit: int):
     if dig_contains_5:
         return "buzz"
 
-    return str(digit)
+    return dig_str
 
 
 def fizz_buzz():
