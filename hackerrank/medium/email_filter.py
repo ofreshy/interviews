@@ -66,8 +66,14 @@ Sample Output
 """
 
 import re
-EMAIL_PARTS_REGEX = re.compile(r"(?P<user>\w+)@(?P<domain>[a-z0-9]+)\.(?P<suffix>[a-z]{3})", re.IGNORECASE)
-m = EMAIL_PARTS_REGEX.match('brian23@hackerrank.com')
-print(m.groups())
-m = EMAIL_PARTS_REGEX.match('Brian23@hHckerrank.kkkd')
-print(m.groups())
+EMAIL_PARTS_REGEX = re.compile(r"(?P<user>[a-z0-9-_]+)@(?P<domain>[a-z0-9]+)\.(?P<suffix>[a-z0-9]{1,3}$)", re.IGNORECASE)
+
+
+def filter(email):
+    """
+
+    :param email:
+    :return: True if this is a valid email, false otherwise
+    """
+    return EMAIL_PARTS_REGEX.match(email) is not None
+
