@@ -20,4 +20,3 @@ def order(names):
 assert order(("Ben", )) == "Ben"
 assert order(("Ben", "Valery", "Ben")) == "Ben"
 assert order(("Ben", "Valery", "Ben", "Valery")) == "Valery"
-
