@@ -59,7 +59,7 @@ sys.stdin.readline()
 
 word_count = OrderedDict()
 for line in sys.stdin:
-    word = line.rstrip().strip()
+    word = line.strip()
     count = word_count.get(word, 0)
     word_count[word] = count + 1
 
