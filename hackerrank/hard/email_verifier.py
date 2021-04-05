@@ -37,21 +37,37 @@ and len(re.findall(regex_alternating_repetitive_digit_pair, P)) < 2)
 
 """
 
-regex_integer_in_range = re.compile(r"^[1-9][0-9]{5}")
-regex_alternating_repetitive_digit_pair = re.compile(r"(\d)\d\1*")
+regex_integer_in_range = re.compile(r"^[1-9][0-9]{5}$")
+regex_alternating_repetitive_digit_pair = re.compile(r"(\d)(?=\d\1)")
 
 
 assert regex_integer_in_range.match("111111") is not None
 assert regex_integer_in_range.match("999999") is not None
 assert regex_integer_in_range.match("011111") is None
 assert regex_integer_in_range.match("99999") is None
+assert regex_integer_in_range.match("9999999") is None
 assert regex_integer_in_range.match("abcdefg") is None
+assert regex_integer_in_range.match("0123456") is None
 
 
-print(regex_alternating_repetitive_digit_pair.findall("552523") )
 assert regex_alternating_repetitive_digit_pair.findall("121426") == ["1"]
 assert regex_alternating_repetitive_digit_pair.findall("523563") == []
-print(regex_alternating_repetitive_digit_pair.findall("552523") )
 assert regex_alternating_repetitive_digit_pair.findall("552523") == ["5", "2"]
+assert regex_alternating_repetitive_digit_pair.findall("0123456") == []
 
+
+def verify(p):
+    v1 = bool(regex_integer_in_range.match(p))
+    v2 = len(regex_alternating_repetitive_digit_pair.findall(p)) < 2
+    return v1 and v2
+
+
+assert verify("0123456") is False
+assert verify("1000000") is False
+assert verify("1013439") is False
+assert verify("123456799") is False
+
+
+assert verify("123456") is True
+assert verify("101234") is True
 
