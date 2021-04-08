@@ -10,7 +10,7 @@ def solution(A):
     total_sum = sum(A)
     sum_up_to_i_minus_1 = 0
     sum_from_i_plus_1_to_n = total_sum
-    for i in xrange(len(A)):
+    for i in range(len(A)):
         sum_from_i_plus_1_to_n -= A[i]
         if sum_up_to_i_minus_1 == sum_from_i_plus_1_to_n:
             solutions.append(i)
