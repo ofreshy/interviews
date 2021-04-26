@@ -102,11 +102,7 @@ def num_grid(grid):
     new_cells = [["0" for _ in range(n)] for _ in range(n)]
     for i in range(n):
         for j in range(n):
-            if is_mine(grid[i][j]):
-                cell = mine
-            else:
-                cell = str(count_mines(i, j))
-            new_cells[i][j] = cell
+            new_cells[i][j] = mine if is_mine(grid[i][j]) else count_mines(i, j)
 
     return new_cells
 
