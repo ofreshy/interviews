@@ -22,52 +22,58 @@ class TestPerson(unittest.TestCase):
         self.assertEqual(expected_name, p.full_name())
 
 
+def new_bank_account(overdraft=0):
+    return models.BankAccount(
+        id_="test",
+        person=models.Person(id_="", first_name="a", middle_name="c", last_name="b"),
+        time_zone=models.ist,
+        _overdraft=overdraft,
+    )
+
+
 class TestBankAccount(unittest.TestCase):
 
-    def new_bank_account(self, overdraft=0):
-        return models.BankAccount(
-            id_="test",
-            person=models.Person(id_="", first_name="a", middle_name="c", last_name="b"),
-            time_zone=models.ist,
-            _overdraft=overdraft,
-        )
-
     def test_new_bank_account_is_0_balance(self):
-        b = self.new_bank_account()
+        b = new_bank_account()
         self.assertEqual(0.0, b.balance)
 
     def test_new_bank_account_with_overdraft_set(self):
-        b = self.new_bank_account(overdraft=100)
+        b = new_bank_account(overdraft=100)
         self.assertEqual(100.0, b.overdraft)
 
     def test_bank_account_update_after_deposit(self):
-        b = self.new_bank_account()
+        b = new_bank_account()
         b.deposit(models.Deposit(value=100))
         self.assertEqual(100.0, b.balance)
 
     def test_bank_account_update_after_withdraw(self):
-        b = self.new_bank_account()
+        b = new_bank_account()
         b.deposit(models.Deposit(value=100))
         b.withdraw(models.Withdraw(value=50))
         self.assertEqual(50.0, b.balance)
 
     def test_bank_account_update_after_withdraw_with_overdraft(self):
-        b = self.new_bank_account(overdraft=50)
+        b = new_bank_account(overdraft=50)
         b.deposit(models.Deposit(value=100))
         b.withdraw(models.Withdraw(value=120))
         self.assertEqual(-20.0, b.balance)
 
     def test_bank_account_update_after_withdraw_without_overdraft(self):
-        b = self.new_bank_account()
+        b = new_bank_account()
         b.deposit(models.Deposit(value=100))
         with self.assertRaises(ValueError):
             b.withdraw(models.Withdraw(value=150))
 
     def test_bank_account_update_after_withdraw_when_exceeds_overdraft(self):
-        b = self.new_bank_account(overdraft=20)
+        b = new_bank_account(overdraft=20)
         b.deposit(models.Deposit(value=100))
         with self.assertRaises(ValueError):
             b.withdraw(models.Withdraw(value=150))
+
+
+class TestTransactions(unittest.TestCase):
+    pass
+
 
 
 if __name__ == '__main__':

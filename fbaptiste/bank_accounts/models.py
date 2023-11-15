@@ -32,10 +32,8 @@ class Person:
         self.middle_name = self.middle_name.lower().capitalize()
 
     def full_name(self):
-        if self.middle_name:
-            return f"{self.first_name} {self.middle_name} {self.last_name}"
-        else:
-            return f"{self.first_name} {self.last_name}"
+        middle_name = f" {self.middle_name} " if self.middle_name else " "
+        return f"{self.first_name}{middle_name}{self.last_name}"
 
 
 class PeopleFactory:
